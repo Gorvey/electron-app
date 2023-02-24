@@ -1,3 +1,10 @@
+/*
+ * @Author: zengzhe
+ * @Date: 2023-02-21 14:19:42
+ * @LastEditors: zengzhe
+ * @LastEditTime: 2023-02-21 16:43:22
+ * @Description:
+ */
 import { app, shell, BrowserWindow, BrowserView, screen } from 'electron'
 import { join } from 'path'
 import icon from '../../../resources/icon.png?asset'
@@ -6,13 +13,14 @@ export const initMainWindow = () => {
   const { height: screenHeight, width: screenWidth } = primaryScreen.workAreaSize
   const mainWindowHeight = Math.round(screenHeight * 0.85)
   const mainWindowWidth = Math.round(screenWidth * 0.48)
+  console.log(mainWindowHeight)
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: mainWindowWidth,
     height: mainWindowHeight,
     x: Math.round(screenWidth - mainWindowWidth - 20),
     y: Math.round((screenHeight - mainWindowHeight) / 2),
-    useContentSize: true,
+    useContentSize: false,
     show: true,
     autoHideMenuBar: true,
     resizable: false,
@@ -72,13 +80,13 @@ export const initMainView = (mainWindow) => {
     y: 0
   })
   if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
-    webview.webContents.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/webview.html`)
+    // webview.webContents.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/webview.html`)
     barView.webContents.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/barView.html`)
   } else {
-    webview.webContents.loadFile(join(__dirname, '../renderer/webview.html'))
+    // webview.webContents.loadFile(join(__dirname, '../renderer/webview.html'))
     barView.webContents.loadFile(join(__dirname, '../renderer/barView.html'))
   }
-  webview.webContents.openDevTools({
+  barView.webContents.openDevTools({
     mode: 'detach'
   })
 }

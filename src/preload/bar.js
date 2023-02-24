@@ -1,6 +1,12 @@
+/*
+ * @Author: zengzhe
+ * @Date: 2023-02-21 15:30:23
+ * @LastEditors: zengzhe
+ * @LastEditTime: 2023-02-24 16:43:19
+ * @Description:
+ */
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
 // Custom APIs for renderer
 const api = {}
 
